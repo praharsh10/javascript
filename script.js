@@ -11,6 +11,12 @@ function redirect()
 	window.location="http://www.google.com";
 }
 
+function callme()
+{
+	callthis();
+	getSelectionText();
+}
+
 function getSelectionText() {
     var text="";
     if (window.getSelection) {
@@ -25,6 +31,40 @@ function getSelectionText() {
     }
 }
 
+function callthis()
+{
+	alert(getSelectedNode());
+}
+
+
+function getSelectedNode()
+{
+    if (document.selection)
+        return document.selection.createRange().parentElement();
+    else
+    {
+        var selection = window.getSelection();
+        if (selection.rangeCount > 0)
+            return selection.getRangeAt(0).startContainer.parentNode;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function highlightSelection() {
     var userSelection = window.getSelection().getRangeAt(0);
     var safeRanges = getSafeRanges(userSelection);
@@ -34,6 +74,7 @@ function highlightSelection() {
 }
 function highlightRange(range) {
     var newNode = document.createElement("div");
+    newNode.id='highlight'
     newNode.setAttribute(
        "style",
        "background-color: yellow; display: inline;"
